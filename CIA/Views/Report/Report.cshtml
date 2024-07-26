@@ -1,0 +1,312 @@
+﻿
+@{
+    ViewBag.Title = "Report";
+    Layout = "~/Views/Shared/_CommonLayout.cshtml";
+}
+
+<script src="~/Scripts/User_Defined/reports.js"></script>
+
+<script src="~/Scripts/simple-autocomplete.js"></script>
+<link href="~/Styles/Common/simple-autocomplete.css" rel="stylesheet" />
+<link href="~/Styles/UserStyles/table_style.css" rel="stylesheet" />
+
+
+<style>
+    .button {
+        color: #fff;
+        background-color: rgb(89,89,89);
+        border-color: rgb(89,89,89);
+        font-family: 'Segoe UI';
+        border-radius: 0px;
+        display: inline-block;
+        /*padding: 6px 12px;*/
+        padding: 0px;
+        font-size: 16pt;
+        height: 42px;
+        width: 65px;
+        margin-bottom: 0;
+        /*font-size: 14px;*/
+        font-weight: normal;
+        line-height: 1.42857143;
+        text-align: center;
+        white-space: nowrap;
+        vertical-align: middle;
+        -ms-touch-action: manipulation;
+        touch-action: manipulation;
+        cursor: pointer;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+        background-image: none;
+        border: 1px solid transparent;
+        border-radius: 0px;
+    }
+
+    .button5 {
+        background-color: white;
+        color: black;
+        border: 2px solid #555555;
+    }
+
+        .button5:hover {
+            background-color: #4681f4;
+            color: white;
+        }
+
+    .input-container {
+        display: -ms-flexbox; /* IE10 */
+        display: flex;
+        width: 100%;
+    }
+
+    .icon {
+        padding: 7px;
+        background: #B0C4DE;
+        color: black;
+        margin-left: -8px;
+        text-align: center;
+    }
+</style>
+
+<div id="app" ng-app="Myreport">
+    <div ng-controller="report_Controller" align="center">
+
+        <div class="row" style="margin: 2px;">
+            <div class="col-md-12">
+                <div class="panel panel-default" style="margin: 15px; border-radius: 0px; border:0px;">
+                    <div class="panel-body" style="padding: 7px;">
+
+                        <div class="container" style="border: 0px solid #BEBEBE; padding: 0px; background: #B0C4DE; width: 98%;">
+                            <table class="table" style="border-style:hidden; width: 100%; padding: 5px; font-family: Segoe UI; font-size: 16pt; margin-top: 15px; background-color: #B0C4DE">
+
+                                <tr style="background-color: #B0C4DE">
+                                    <td><b>Report Type</b></td>
+                                    <td>
+                                        <div class="input-container">
+                                            <select ng-model="dwn_report" class="form-control" style="z-index: 0; font-family: 'Segoe UI'; font-size: 12pt; width: 82%">
+                                                <option value="">-Select-</option>
+                                                <option value="1">Client Report</option>
+                                                <option value="2">Invoice Report</option>
+                                                <option value="3">UserMaster Report</option>
+                                            </select>
+                                        </div>
+                                    </td>
+                                    <td><b>Branch</b></td>
+                                    <td style="width:22%">
+                                        <div class="input-container">
+                                            <select class="form-control" ng-model="invoc_genrated" ng-change="onSelectMstgenerate_by()"
+                                                    style="z-index: 0; font-family: 'Segoe UI'; width: 84%; font-size:12pt;" title="Invoice Generated">
+                                                <option value="" disabled selected>-Select User Branch-</option>
+                                                <option ng-repeat="t in BranchMst_generateBy" value="{{t.CBM_BranchCode}}" ng-bind="t.CBM_BranchCode"></option>
+                                            </select>
+                                        </div>
+                                    </td>
+                                    <td><b>From Date</b></td>
+                                    <td>
+                                        <div class="input-container">
+                                            <input id="frmdate" type="date" ng-model="frmdate" style="width:82%; font-size: 12pt; border: 0px solid white; margin-left: 5px; " placeholder="" class="form-control" />
+                                        </div>
+                                    </td>
+                                    <td><b>End Date</b></td>
+                                    <td>
+                                        <div class="input-container">
+                                            <input id="enddate" type="date" ng-model="enddate" style="width:82%; font-size: 12pt; border: 0px solid white; margin-left: 5px; " placeholder="" class="form-control" />
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
+
+
+                            <div class="panel panel-default" style="border-radius: 0px; margin-left: 30px; margin-right: 0px; border: 0px;">
+
+                                <table class="table" style="border-style: hidden; width: 100%; padding: 5px; font-family: Segoe UI; margin-top: 10px; font-size: 16pt; margin-left: 0px;">
+
+                                    <tr style="background-color: #B0C4DE" >
+                                        <td style="width:12%" ng-show="dwn_report==2"><b>Invoice Report</b></td>
+                                        <td style="width:22%" ng-show="dwn_report==2">
+                                            <div class="input-container">
+                                                <select ng-model="report_opts" class="form-control" style="z-index: 0; font-family: 'Segoe UI'; font-size:12pt; float:right ">
+                                                    <option value="">-Select-</option>
+                                                    <option value="a">Client Based</option>
+                                                    <option value="b">Date Based</option>
+                                                    <option value="c">Cancelled Invoice Report</option>
+                                                </select>
+                                            </div>
+                                        </td>
+                                        <td style="width: 10%;" ng-show="dwn_report==2 && report_opts=='a'"><b>Client Name</b></td>
+                                        <td style="width:28%" ng-show="dwn_report==2">
+                                            <div class="input-container">
+                                                <autocomplete id="clientName" ng-model="clientName" options="ClitName" title="Client"
+                                                              on-select="onSelectdwnrpt" display-property="ce_name" input-class="form-control" clear-input="false"
+                                                              style="z-index: 0; width:90% " autocomplete="off"></autocomplete>
+                                            </div>
+                                        </td>
+                                        <td style="text-align:end">
+                                                <button id="btnsubmit" ng-click="btClk('view')" type="button" class="button button5" style="width:12%;"><span>View</span></button>
+                                                <button id="btnsubmit" ng-click="btClk('reset')" type="button" class="button button5" style="width:12%; "><span> Reset</span></button>
+
+                                        </td>
+                                    </tr>
+                                </table>
+
+                                @*<div class="row" align="left" style="border-radius: 0px; width: 100%; background: #B0C4DE; ">
+                                    <div class="col-md-6" style="text-align:center;">
+                                        <div ng-show="dwn_report==2" style="padding: 0 5px 0 5px;">
+                                            <span style="font-family: 'Segoe UI'; font-size:16pt;"><strong>Invoice Report options</strong></span>
+                                            <select ng-model="report_opts" class="form-control" style="z-index: 0; font-family: 'Segoe UI'; font-size:12pt; margin-right:-17px; width:38.5%; float:right ">
+                                                <option value="">-Select-</option>
+                                                <option value="a">Client Based</option>
+                                                <option value="b">Date Based</option>
+                                                <option value="c">Cancelled Invoice Report</option>
+                                            </select>
+                                        </div>
+
+                                        <div ng-show="dwn_report==1" style="padding: 0 5px 0 5px;">
+                                            <span style="font-family: 'Segoe UI'; font-size:16pt;"><strong>Client Name</strong></span>
+                                            <autocomplete id="clientName" ng-model="clientName" options="ClitName" title="Client"
+                                                          on-select="onSelectdwnrpt" display-property="ce_name" input-class="form-control" clear-input="false"
+                                                          style="z-index: 0; width: 39%; margin-right: -18px; float: right " autocomplete="off"></autocomplete>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <button id="btnsubmit" ng-click="btClk('view')" type="button" class="button button5" style="width:12%;"><span>View</span></button>
+                                        <button id="btnsubmit" ng-click="btClk('reset')" type="button" class="button button5" style="width:12%; "><span> Reset</span></button>
+
+                                    </div>
+                                </div>*@
+                            </div>
+                        </div>
+
+                        <div style="margin:5px" ng-show="dwn_report==1 && clientrpt == 'on'">
+                            <h1 class="ribbon" style="margin-top:32px; font-size:18pt; "><strong>Client List for {{BrnName}} </strong></h1>
+
+                            <table id="clientrpot" class="table tb" style="width: 96%; margin-bottom: 40px;">
+                                <thead id="head_myaction">
+                                    <tr>
+                                        <th style="width: auto"><b>Client No.</b></th>
+                                        <th style="width: auto"><b>Client Name</b></th>
+                                        <th style="width: auto"><b>Total No. of Transactions</b></th>
+                                        <th style="width: auto"><b>Total Transaction amount</b></th>
+                                    </tr>
+                                </thead>
+                                <tbody id="body_myaction">
+                                    <tr ng-repeat="r in Clientdetails">
+                                        <td style="width: auto" align="center">{{r.clientNo}}</td>
+                                        <td style="width: auto" align="justify">{{r.clientName}}</td>
+                                        <td style="width: auto" align="center">{{r.total_no_transactions}}</td>
+                                        <td style="width: auto" align="justify">{{r.total_transaction_amt}}</td>
+                                    </tr>
+
+                                    <tr ng-if="!Clientdetails.length">
+                                        <td style="width: auto; text-align: center" colspan="8" align="center">No data available</td>
+                                    </tr>
+
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div style="margin:5px" ng-show="dwn_report==2 && report_opts=='a'">
+                            <h1 class="ribbon" style="margin-top:32px; font-size:18pt; "><strong>Invoices transacted for {{ClientName}} from {{frmdate}} to {{enddate}}</strong></h1>
+
+                            <table id="clientrpot" class="table tb" style="width: 96%; margin-bottom: 40px;">
+                                <thead id="head_myaction">
+                                    <tr>
+                                        <th style="width: auto"><b>Invoice No.</b></th>
+                                        <th style="width: auto"><b>Invoice Date</b></th>
+                                        <th style="width: auto"><b>Invoice amount</b></th>
+                                        <th style="width: auto"><b>View Invoice</b></th>
+                                    </tr>
+                                </thead>
+                                <tbody id="body_myaction">
+                                    <tr ng-repeat="r in inv_header| filter:txtdash_action as results">
+                                        <td style="width: auto" align="center">{{r.ie_invgenrtdBy}}</td>
+                                        <td style="width: auto" align="justify">{{r.ie_paymntTrms}}</td>
+                                        <td style="width: auto" align="center"><b>{{::r.ie_status}}</b></td>
+                                        <td style="width: auto" align="justify">{{r.ie_invDdate}}</td>
+                                    </tr>
+
+                                    <tr ng-if="!inv_header.length">
+                                        <td style="width: auto; text-align: center" colspan="8" align="center">No data available</td>
+                                    </tr>
+
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div style="margin:5px" ng-show="dwn_report==2 && report_opts=='b'">
+                            <h1 class="ribbon" style="margin-top:32px; font-size:18pt; "><strong>Invoices transacted between {{frmdate}} and {{enddate}}</strong></h1>
+
+                            <table id="clientrpot" class="table tb" style="width: 96%; margin-bottom: 40px;">
+                                <thead id="head_myaction">
+                                    <tr>
+                                        <th style="width: auto"><b>Client No.</b></th>
+                                        <th style="width: auto"><b>Client Name</b></th>
+                                        <th style="width: auto"><b>Client Address</b></th>
+                                        <th style="width: auto"><b>Invoice No.</b></th>
+                                        <th style="width: auto"><b>Invoice Date</b></th>
+                                        <th style="width: auto"><b>Invoice amount</b></th>
+                                        <th style="width: auto"><b>View Invoice</b></th>
+                                    </tr>
+                                </thead>
+                                <tbody id="body_myaction">
+                                    <tr ng-repeat="r in inv_header| filter:txtdash_action as results">
+                                        <td style="width: auto" align="center">{{r.ie_invgenrtdBy}}</td>
+                                        <td style="width: auto" align="justify">{{r.ie_paymntTrms}}</td>
+                                        <td style="width: auto" align="center"><b>{{::r.ie_status}}</b></td>
+                                        <td style="width: auto" align="center">{{r.ie_invgenrtdBy}}</td>
+                                        <td style="width: auto" align="justify">{{r.ie_paymntTrms}}</td>
+                                        <td style="width: auto" align="center"><b>{{::r.ie_status}}</b></td>
+                                        <td style="width: auto" align="justify">{{r.ie_invDdate}}</td>
+                                    </tr>
+
+                                    <tr ng-if="!inv_header.length">
+                                        <td style="width: auto; text-align: center" colspan="8" align="center">No data available</td>
+                                    </tr>
+
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div style="margin:5px" ng-show="dwn_report==2 && report_opts=='c'">
+                            <h1 class="ribbon" style="margin-top:32px; font-size:18pt; "><strong>Cancelled Invoices between {{frmdate}} and {{enddate}}</strong></h1>
+
+                            <table id="clientrpot" class="table tb" style="width: 96%; margin-bottom: 40px;">
+                                <thead id="head_myaction">
+                                    <tr>
+                                        <th style="width: auto"><b>Client No.</b></th>
+                                        <th style="width: auto"><b>Client Name</b></th>
+                                        <th style="width: auto"><b>Invoice No.</b></th>
+                                        <th style="width: auto"><b>Invoice Date</b></th>
+                                        <th style="width: auto"><b>Invoice amount</b></th>
+                                        <th style="width: auto"><b>View Invoice</b></th>
+                                    </tr>
+                                </thead>
+                                <tbody id="body_myaction">
+                                    <tr ng-repeat="r in inv_header| filter:txtdash_action as results">
+                                        <td style="width: auto" align="center">{{r.ie_invgenrtdBy}}</td>
+                                        <td style="width: auto" align="justify">{{r.ie_paymntTrms}}</td>
+                                        <td style="width: auto" align="center">{{r.ie_invgenrtdBy}}</td>
+                                        <td style="width: auto" align="justify">{{r.ie_paymntTrms}}</td>
+                                        <td style="width: auto" align="center"><b>{{::r.ie_status}}</b></td>
+                                        <td style="width: auto" align="justify">{{r.ie_invDdate}}</td>
+                                    </tr>
+
+                                    <tr ng-if="!inv_header.length">
+                                        <td style="width: auto; text-align: center" colspan="8" align="center">No data available</td>
+                                    </tr>
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+@Html.Hidden("onViewClicked", @Url.Action("oncliked_view", "Report"))
+@Html.Hidden("urlrptLoad", Url.Action("CEdata_load", "InvoiceEntry"))

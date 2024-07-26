@@ -1,0 +1,109 @@
+-----------Exception Details on  1/22/2023 6:57:23 PM-----------------
+-------------------------------------------------------------------------------------
+
+
+
+Log Written Date: 1/22/2023 6:57:23 PM
+
+Logged User Full Name : Unknown
+
+Logged Username : Unknown
+
+User Role : Unknown
+
+Error Location : System.Data.Entity.Core.EntityClient.Internal.EntityCommandDefinition
+
+Error Line No : row_id)
+
+Error Class: EntityCommandCompilationException
+
+Exception Type: System.Data.Entity.Core.EntityCommandCompilationException
+
+Error Message : An error occurred while preparing the command definition. See the inner exception for details.
+
+Error Page Url: https://localhost:44312/InvoiceEntry/onEditIEData
+
+Exception : System.Data.Entity.Core.EntityCommandCompilationException: An error occurred while preparing the command definition. See the inner exception for details. ---> System.InvalidOperationException: 'mmm' is not a valid value for the DATEPART argument in the 'SqlServer.DATENAME' function.
+   at System.Data.Entity.SqlServer.SqlGen.SqlFunctionCallHandler.HandleDatepartDateFunction(SqlGenerator sqlgen, DbFunctionExpression e)
+   at System.Data.Entity.SqlServer.SqlGen.SqlFunctionCallHandler.HandleSpecialFunction(Dictionary`2 handlers, SqlGenerator sqlgen, DbFunctionExpression e)
+   at System.Data.Entity.SqlServer.SqlGen.SqlFunctionCallHandler.HandleSpecialStoreFunction(SqlGenerator sqlgen, DbFunctionExpression e)
+   at System.Data.Entity.SqlServer.SqlGen.SqlFunctionCallHandler.GenerateFunctionCallSql(SqlGenerator sqlgen, DbFunctionExpression functionExpression)
+   at System.Data.Entity.SqlServer.SqlGen.SqlGenerator.Visit(DbFunctionExpression e)
+   at System.Data.Entity.Core.Common.CommandTrees.DbFunctionExpression.Accept[TResultType](DbExpressionVisitor`1 visitor)
+   at System.Data.Entity.SqlServer.SqlGen.SqlGenerator.VisitIsNullExpression(DbIsNullExpression e, Boolean negate)
+   at System.Data.Entity.SqlServer.SqlGen.SqlGenerator.Visit(DbIsNullExpression e)
+   at System.Data.Entity.Core.Common.CommandTrees.DbIsNullExpression.Accept[TResultType](DbExpressionVisitor`1 visitor)
+   at System.Data.Entity.SqlServer.SqlGen.SqlGenerator.Visit(DbCaseExpression e)
+   at System.Data.Entity.Core.Common.CommandTrees.DbCaseExpression.Accept[TResultType](DbExpressionVisitor`1 visitor)
+   at System.Data.Entity.SqlServer.SqlGen.SqlFunctionCallHandler.HandleSpecialFunctionToOperator(SqlGenerator sqlgen, DbFunctionExpression e, Boolean parenthesizeArguments)
+   at System.Data.Entity.SqlServer.SqlGen.SqlFunctionCallHandler.HandleConcatFunction(SqlGenerator sqlgen, DbFunctionExpression e)
+   at System.Data.Entity.SqlServer.SqlGen.SqlFunctionCallHandler.HandleSpecialFunction(Dictionary`2 handlers, SqlGenerator sqlgen, DbFunctionExpression e)
+   at System.Data.Entity.SqlServer.SqlGen.SqlFunctionCallHandler.HandleSpecialCanonicalFunction(SqlGenerator sqlgen, DbFunctionExpression e)
+   at System.Data.Entity.SqlServer.SqlGen.SqlFunctionCallHandler.GenerateFunctionCallSql(SqlGenerator sqlgen, DbFunctionExpression functionExpression)
+   at System.Data.Entity.SqlServer.SqlGen.SqlGenerator.Visit(DbFunctionExpression e)
+   at System.Data.Entity.Core.Common.CommandTrees.DbFunctionExpression.Accept[TResultType](DbExpressionVisitor`1 visitor)
+   at System.Data.Entity.SqlServer.SqlGen.SqlFunctionCallHandler.HandleSpecialFunctionToOperator(SqlGenerator sqlgen, DbFunctionExpression e, Boolean parenthesizeArguments)
+   at System.Data.Entity.SqlServer.SqlGen.SqlFunctionCallHandler.HandleConcatFunction(SqlGenerator sqlgen, DbFunctionExpression e)
+   at System.Data.Entity.SqlServer.SqlGen.SqlFunctionCallHandler.HandleSpecialFunction(Dictionary`2 handlers, SqlGenerator sqlgen, DbFunctionExpression e)
+   at System.Data.Entity.SqlServer.SqlGen.SqlFunctionCallHandler.HandleSpecialCanonicalFunction(SqlGenerator sqlgen, DbFunctionExpression e)
+   at System.Data.Entity.SqlServer.SqlGen.SqlFunctionCallHandler.GenerateFunctionCallSql(SqlGenerator sqlgen, DbFunctionExpression functionExpression)
+   at System.Data.Entity.SqlServer.SqlGen.SqlGenerator.Visit(DbFunctionExpression e)
+   at System.Data.Entity.Core.Common.CommandTrees.DbFunctionExpression.Accept[TResultType](DbExpressionVisitor`1 visitor)
+   at System.Data.Entity.SqlServer.SqlGen.SqlFunctionCallHandler.HandleSpecialFunctionToOperator(SqlGenerator sqlgen, DbFunctionExpression e, Boolean parenthesizeArguments)
+   at System.Data.Entity.SqlServer.SqlGen.SqlFunctionCallHandler.HandleConcatFunction(SqlGenerator sqlgen, DbFunctionExpression e)
+   at System.Data.Entity.SqlServer.SqlGen.SqlFunctionCallHandler.HandleSpecialFunction(Dictionary`2 handlers, SqlGenerator sqlgen, DbFunctionExpression e)
+   at System.Data.Entity.SqlServer.SqlGen.SqlFunctionCallHandler.HandleSpecialCanonicalFunction(SqlGenerator sqlgen, DbFunctionExpression e)
+   at System.Data.Entity.SqlServer.SqlGen.SqlFunctionCallHandler.GenerateFunctionCallSql(SqlGenerator sqlgen, DbFunctionExpression functionExpression)
+   at System.Data.Entity.SqlServer.SqlGen.SqlGenerator.Visit(DbFunctionExpression e)
+   at System.Data.Entity.Core.Common.CommandTrees.DbFunctionExpression.Accept[TResultType](DbExpressionVisitor`1 visitor)
+   at System.Data.Entity.SqlServer.SqlGen.SqlFunctionCallHandler.HandleSpecialFunctionToOperator(SqlGenerator sqlgen, DbFunctionExpression e, Boolean parenthesizeArguments)
+   at System.Data.Entity.SqlServer.SqlGen.SqlFunctionCallHandler.HandleConcatFunction(SqlGenerator sqlgen, DbFunctionExpression e)
+   at System.Data.Entity.SqlServer.SqlGen.SqlFunctionCallHandler.HandleSpecialFunction(Dictionary`2 handlers, SqlGenerator sqlgen, DbFunctionExpression e)
+   at System.Data.Entity.SqlServer.SqlGen.SqlFunctionCallHandler.HandleSpecialCanonicalFunction(SqlGenerator sqlgen, DbFunctionExpression e)
+   at System.Data.Entity.SqlServer.SqlGen.SqlFunctionCallHandler.GenerateFunctionCallSql(SqlGenerator sqlgen, DbFunctionExpression functionExpression)
+   at System.Data.Entity.SqlServer.SqlGen.SqlGenerator.Visit(DbFunctionExpression e)
+   at System.Data.Entity.Core.Common.CommandTrees.DbFunctionExpression.Accept[TResultType](DbExpressionVisitor`1 visitor)
+   at System.Data.Entity.SqlServer.SqlGen.SqlGenerator.VisitNewInstanceExpression(DbNewInstanceExpression e, Boolean aliasesNeedRenaming, Dictionary`2& newColumns)
+   at System.Data.Entity.SqlServer.SqlGen.SqlGenerator.Visit(DbProjectExpression e)
+   at System.Data.Entity.Core.Common.CommandTrees.DbProjectExpression.Accept[TResultType](DbExpressionVisitor`1 visitor)
+   at System.Data.Entity.SqlServer.SqlGen.SqlGenerator.VisitExpressionEnsureSqlStatement(DbExpression e, Boolean addDefaultColumns, Boolean markAllDefaultColumnsAsUsed)
+   at System.Data.Entity.SqlServer.SqlGen.SqlGenerator.Visit(DbLimitExpression e)
+   at System.Data.Entity.Core.Common.CommandTrees.DbLimitExpression.Accept[TResultType](DbExpressionVisitor`1 visitor)
+   at System.Data.Entity.SqlServer.SqlGen.SqlGenerator.VisitInputExpression(DbExpression inputExpression, String inputVarName, TypeUsage inputVarType, Symbol& fromSymbol)
+   at System.Data.Entity.SqlServer.SqlGen.SqlGenerator.Visit(DbProjectExpression e)
+   at System.Data.Entity.Core.Common.CommandTrees.DbProjectExpression.Accept[TResultType](DbExpressionVisitor`1 visitor)
+   at System.Data.Entity.SqlServer.SqlGen.SqlGenerator.VisitExpressionEnsureSqlStatement(DbExpression e, Boolean addDefaultColumns, Boolean markAllDefaultColumnsAsUsed)
+   at System.Data.Entity.SqlServer.SqlGen.SqlGenerator.GenerateSql(DbQueryCommandTree tree, HashSet`1& paramsToForceNonUnicode)
+   at System.Data.Entity.SqlServer.SqlGen.SqlGenerator.GenerateSql(DbCommandTree tree, SqlVersion sqlVersion, List`1& parameters, CommandType& commandType, HashSet`1& paramsToForceNonUnicode)
+   at System.Data.Entity.SqlServer.SqlProviderServices.CreateCommand(DbProviderManifest providerManifest, DbCommandTree commandTree)
+   at System.Data.Entity.SqlServer.SqlProviderServices.CreateDbCommandDefinition(DbProviderManifest providerManifest, DbCommandTree commandTree)
+   at System.Data.Entity.Core.Common.DbProviderServices.CreateDbCommandDefinition(DbProviderManifest providerManifest, DbCommandTree commandTree, DbInterceptionContext interceptionContext)
+   at System.Data.Entity.Core.Common.DbProviderServices.CreateCommandDefinition(DbCommandTree commandTree, DbInterceptionContext interceptionContext)
+   at System.Data.Entity.Core.EntityClient.Internal.EntityCommandDefinition..ctor(DbProviderFactory storeProviderFactory, DbCommandTree commandTree, DbInterceptionContext interceptionContext, IDbDependencyResolver resolver, BridgeDataReaderFactory bridgeDataReaderFactory, ColumnMapFactory columnMapFactory)
+   --- End of inner exception stack trace ---
+   at System.Data.Entity.Core.EntityClient.Internal.EntityCommandDefinition..ctor(DbProviderFactory storeProviderFactory, DbCommandTree commandTree, DbInterceptionContext interceptionContext, IDbDependencyResolver resolver, BridgeDataReaderFactory bridgeDataReaderFactory, ColumnMapFactory columnMapFactory)
+   at System.Data.Entity.Core.EntityClient.Internal.EntityProviderServices.CreateDbCommandDefinition(DbProviderManifest providerManifest, DbCommandTree commandTree, DbInterceptionContext interceptionContext)
+   at System.Data.Entity.Core.Common.DbProviderServices.CreateCommandDefinition(DbCommandTree commandTree, DbInterceptionContext interceptionContext)
+   at System.Data.Entity.Core.Objects.Internal.ObjectQueryExecutionPlanFactory.CreateCommandDefinition(ObjectContext context, DbQueryCommandTree tree)
+   at System.Data.Entity.Core.Objects.Internal.ObjectQueryExecutionPlanFactory.Prepare(ObjectContext context, DbQueryCommandTree tree, Type elementType, MergeOption mergeOption, Boolean streaming, Span span, IEnumerable`1 compiledQueryParameters, AliasGenerator aliasGenerator)
+   at System.Data.Entity.Core.Objects.ELinq.ELinqQueryState.GetExecutionPlan(Nullable`1 forMergeOption)
+   at System.Data.Entity.Core.Objects.ObjectQuery`1.<>c__DisplayClass41_0.<GetResults>b__1()
+   at System.Data.Entity.Core.Objects.ObjectContext.ExecuteInTransaction[T](Func`1 func, IDbExecutionStrategy executionStrategy, Boolean startLocalTransaction, Boolean releaseConnectionOnSuccess)
+   at System.Data.Entity.Core.Objects.ObjectQuery`1.<>c__DisplayClass41_0.<GetResults>b__0()
+   at System.Data.Entity.SqlServer.DefaultSqlExecutionStrategy.Execute[TResult](Func`1 operation)
+   at System.Data.Entity.Core.Objects.ObjectQuery`1.GetResults(Nullable`1 forMergeOption)
+   at System.Data.Entity.Core.Objects.ObjectQuery`1.<System.Collections.Generic.IEnumerable<T>.GetEnumerator>b__31_0()
+   at System.Data.Entity.Internal.LazyEnumerator`1.MoveNext()
+   at System.Linq.Enumerable.FirstOrDefault[TSource](IEnumerable`1 source)
+   at System.Data.Entity.Core.Objects.ELinq.ObjectQueryProvider.<>c__14`1.<GetElementFunction>b__14_1(IEnumerable`1 sequence)
+   at System.Data.Entity.Core.Objects.ELinq.ObjectQueryProvider.ExecuteSingle[TResult](IEnumerable`1 query, Expression queryRoot)
+   at System.Data.Entity.Core.Objects.ELinq.ObjectQueryProvider.System.Linq.IQueryProvider.Execute[TResult](Expression expression)
+   at System.Data.Entity.Internal.Linq.DbQueryProvider.Execute[TResult](Expression expression)
+   at System.Linq.Queryable.FirstOrDefault[TSource](IQueryable`1 source)
+   at CIA_BLL.Repository.InvoiceRepository.EditIE_row(Int32 row_id)
+
+
+--------------------------------*End*------------------------------------------
+
+
+

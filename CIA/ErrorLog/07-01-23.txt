@@ -1,0 +1,33 @@
+-----------Exception Details on  1/7/2023 9:57:13 PM-----------------
+-------------------------------------------------------------------------------------
+
+
+
+Log Written Date: 1/7/2023 9:57:13 PM
+
+Logged User Full Name : Unknown
+
+Logged Username : Unknown
+
+User Role : Unknown
+
+Error Location : CIA_BLL.Repository.CliententryRepository
+
+Error Line No : _state)
+
+Error Class: NullReferenceException
+
+Exception Type: System.NullReferenceException
+
+Error Message : Object reference not set to an instance of an object.
+
+Error Page Url: https://localhost:44312/ClientEntry/addClientEntry
+
+Exception : System.NullReferenceException: Object reference not set to an instance of an object.
+   at CIA_BLL.Repository.CliententryRepository.add_CE(List`1 ClientEntry_list, String clicked_state)
+
+
+--------------------------------*End*------------------------------------------
+
+
+

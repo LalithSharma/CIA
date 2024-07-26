@@ -1,0 +1,92 @@
+﻿
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>@System.Configuration.ConfigurationManager.AppSettings.Get("Logo")</title>
+    <link rel="shortcut icon" href="~/Images/Icons/user-logo.png" type="image/x-icon" />
+
+    <meta name="viewport" content="width=device-width" />
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="http://code.jquery.com/ui/1.10.3/themes/redmond/jquery-ui.css" rel="stylesheet" />
+    <link href="~/Styles/UserStyles/button_style.css" rel="stylesheet" />
+    <link href="~/Styles/UserStyles/control_style.css" rel="stylesheet" />
+    <link href="~/Styles/UserStyles/table_style.css" rel="stylesheet" />
+    <link href="~/Styles/UserStyles/Alertbox.css" rel="stylesheet" />
+    <link href="~/Styles/UserStyles/ProgressBar.css" rel="stylesheet" />
+    <link href="~/Styles/Common/font-awesome.min.css" rel="stylesheet" />
+    <link href="~/Styles/Common/bootstrap.min.css" rel="stylesheet" />
+
+    <script src="~/Scripts/Common/jquery.min.js"></script>
+    <script src="~/Scripts/Common/jquery-ui.js"></script>
+    <script src="~/Scripts/Common/angular.min.js"></script>
+    <script src="~/Scripts/Common/bootstrap.min.js"></script>
+
+    <link href="~/Styles/Common/jquery.ui.datepicker.css" rel="stylesheet" />
+
+    @*<link href="~/styles/userstyles/login.css" rel="stylesheet" />*@
+    <script src="~/Scripts/Common/Alertbox.js"></script>
+
+    @*----------------------DOubt in this-----------------------------------------*@
+
+    <title>@System.Configuration.ConfigurationManager.AppSettings["SiteTitle"].ToString()</title>
+
+</head>
+<body>
+    <!-- AlertBox -->
+    <div id="MessageBox" class="modal_dialog" role="dialog" ng-hide="true">
+        <div class="modal-dialog" style="margin-top:8%;">
+            <!-- Modal content-->
+            <div id="ModalContent" class="modal-content" style="border-radius:0px; width:375px">
+                <div class="modal-header" id="Msgheader" style="height: 24px; border-radius: 0px; color: whitesmoke; padding: 3px; font-family: Segoe UI; font-size: 12pt; font-weight: 600; vertical-align: middle;">
+                    <span id="Msgtitle" class="modal-title" style="float:left; margin-top:-4px; color:black;" ng-hide="true"></span>
+                    <img onclick="HideMessageBox()" style="height: 14px; float: right;" src="~/Images/Icons/ic_action_cancel.png" />
+                </div>
+                <div class="modal-body" style=" height: 78px; text-align: left; text-space-collapse: collapse; padding: 0px; font-family: 'Segoe UI'; vertical-align: middle; background-color: white; overflow-y: auto;">
+                    <div class="col-sm-1" style="padding: 0px; ">
+                        <img alt="icon" id="Msg-Icon" style="height: 40px; width: 40px;" />
+                    </div>
+                    <div class="col-sm-11" style="vertical-align: middle; min-height: 40px; padding-left: 12px; padding-top: 15px; font-family: 'Segoe UI'; padding-right: 5px;">
+                        <span id="Msg-body" style="text-align: justify; text-space-collapse: collapse; vertical-align: middle; font-size: 14pt; font-family: 'Segoe UI'; white-space: pre-line"></span><br />
+                        @*<span style="text-align: justify; vertical-align: middle; font-size: 10pt; font-family: 'Segoe UI'; font-style: italic; color: darkslategray"></span>*@
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ProgressLoader-->
+    <div id="ProgressBar" align="center" class="backscreen" ng-hide="disp">
+        <img src="~/Images/Common/dot_load.gif" id="loadimg" />
+    </div>
+
+    <div>
+        <header style="overflow:hidden;">
+            <img id="imgid" src="~/Images/Icons/OG_Facebook.png"  style=" width: 99px; height:35px;" />
+            <span style="font-size: 16px; vertical-align: middle; height: 33px; text-align: left; font-weight: normal; font-family: Segoe UI; color: #000000; ">
+                @System.Configuration.ConfigurationManager.AppSettings["SiteHeader"].ToString()
+            </span>
+
+        </header>
+        <div class="content_Login" id="id_content" style="width: 100%; padding: 15px; overflow: auto; height: 91.8vh;">
+            @RenderBody()
+        </div>
+        <footer class="footer" style="font-size: 12px; background-color: #fff; color: black; margin-top: 0px; ">
+            <span>@System.Configuration.ConfigurationManager.AppSettings.Get("Label") - @DateTime.Now.Year  All rights reserved.</span>
+        </footer>
+    </div>
+
+    @Html.Hidden("Icon_Error", Url.Content("~/Images/Alertbox/icon-close.png"))
+    @Html.Hidden("Back_Image", Url.Content("~/Images/back.png"))
+
+
+<style>
+        .content_Login {
+            background: #E6E6E6;
+            background-image: url(@Url.Content("~/Images/Common/bg-04.jpeg"));
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-position: left;
+        }
+</style>
+</body>
+</html>

@@ -1,0 +1,232 @@
+﻿
+@{
+    ViewBag.Title = "Login";
+    Layout = "~/Views/Shared/_LoginLayout.cshtml";
+}
+
+
+<link href="~/Styles/UserStyles/Login.css" rel="stylesheet" />
+<script src="~/Scripts/User_Defined/login.js"></script>
+
+<link href="~/Styles/UserStyles/button_style.css" rel="stylesheet" />
+
+<style>
+    #btnsubmit {
+    }
+
+        #btnsubmit span {
+            cursor: pointer;
+            display: inline-block;
+            position: relative;
+            transition: 0.5s;
+        }
+
+            #btnsubmit span:after {
+                content: '';
+                position: absolute;
+                opacity: 0;
+                top: 0;
+                right: -10px;
+                transition: 0.5s;
+            }
+
+        #btnsubmit:hover span {
+            padding-right: 25px;
+        }
+
+            #btnsubmit:hover span:after {
+                opacity: 10;
+                right: 0;
+            }
+</style>
+
+<style>
+    .button {
+        color: #fff;
+        background-color: rgb(89,89,89);
+        border-color: rgb(89,89,89);
+        font-family: 'Segoe UI';
+        border-radius: 0px;
+        display: inline-block;
+        /*padding: 6px 12px;*/
+        padding: 0px;
+        font-size: 12pt;
+        height: 32px;
+        width: 65px;
+        margin-bottom: 0;
+        /*font-size: 14px;*/
+        font-weight: normal;
+        line-height: 1.42857143;
+        text-align: center;
+        white-space: nowrap;
+        vertical-align: middle;
+        -ms-touch-action: manipulation;
+        touch-action: manipulation;
+        cursor: pointer;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+        background-image: none;
+        border: 1px solid transparent;
+        border-radius: 0px;
+    }
+
+    .button5 {
+        background-color: white;
+        color: black;
+        border: 2px solid #555555;
+    }
+
+        .button5:hover {
+            background-color: #4681f4;
+            color: white;
+        }
+
+    .input-container {
+        display: -ms-flexbox; /* IE10 */
+        display: flex;
+        width: 100%;
+    }
+
+    .icon {
+        padding: 7px;
+        background: #B0C4DE;
+        color: black;
+        margin-left: -8px;
+        text-align: center;
+    }
+</style>
+<div ng-app="lgapp" ng-controller="lgctrl">
+    <div class="row" style="margin-top: 155px; border-radius: 0px; margin-right: 0px;">
+
+        <div class="col-md-9">
+            &nbsp;
+        </div>
+        <div class="col-md-3" style="padding: 0px; ">
+            <div class="panel panel-default" style="border-radius: 0px; margin-top:0px; margin-right: 60px;">
+                <div class="panel-body" style="background-color: #f5f5f5; border-radius: 0px;">
+                    <div class="row">
+                        <div class="col-md-12" style="margin-top:0px; margin-bottom:0px;">
+                            <div class="form-group" style="border-radius:0px;">
+                                <input type="text" ng-model="Username" autofocus placeholder="Username" class="form-control" autocomplete="off" style="border-radius: 0px; z-index: 0; font-size: 12pt; font-family: 'Segoe UI';" />
+                                <i id="ic_user" class="fa fa-user" aria-hidden="true"> &nbsp</i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row" style="margin-top:15px;">
+                        <div class="col-md-12" style="margin-top:0px; margin-bottom:0px;">
+                            <div class="form-group" style="border-radius:0px;">
+                                <input id="passwrd" type="password" ng-model="Password" ng-enter="SigninAction()" placeholder="Password" class="form-control" autocomplete="off" style="border-radius: 0px; z-index: 0; font-size: 12pt; font-family: 'Segoe UI';" />
+                                <i class="fa fa-key"> &nbsp</i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row" style="margin-top:15px;">
+                        <div class="col-md-12" style="margin-top: 0px; margin-bottom: 0px; border: 0px outset; background: lightgoldenrodyellow;">
+                            <p style="font-weight:bold;color:red;">@ViewBag.randomCaptcha</p>
+                            <input type="text" ng-model="clientCaptcha" placeholder="Enter Captach as above text exactly" class="form-control" autocomplete="off" style="border-radius: 0px; z-index: 0; font-size: 10pt; font-family: 'Segoe UI';" />
+                            @*<p style="font-weight:bold;color:red;">@ViewBag.CaptchaError</p>*@
+                        </div>
+                    </div>
+                    <div class="row" style="margin-top:15px; margin-bottom:0px;">
+                        <div class="col-md-6" style="margin-top:0px; margin-bottom:0px;">
+                            <button id="btnsubmit" ng-click="SigninAction('signin')" type="button" class="button button5" style="width:100%;"><span>Sign in</span></button>
+                        </div>
+                        <div class="col-md-6" style="margin-top:0px; margin-bottom:0px;">
+                            <button id="btnsubmit" ng-click="SigninAction('reset')" type="button" class="button button5" style="width:100%;"><span>Reset</span></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!------------------------------------------------gets value from script---------------------->
+@Html.Hidden("lgurl", Url.Action("Loginchecks", "Security"))
+@Html.Hidden("Hmurl", Url.Action("Home", "Dashboard"))
+
+
+<script language="JavaScript">
+// Browserdetectionscript made by Henrik Petersen / NetKontoret
+// Script explained at www.echoecho.com/javascript.htm
+// Please do not remove this and the two lines above.
+// Detect the browsername
+var nVer = navigator.appVersion;
+var nAgt = navigator.userAgent;
+var browserName  = navigator.appName;
+var fullVersion  = ''+parseFloat(navigator.appVersion);
+var majorVersion = parseInt(navigator.appVersion,10);
+var nameOffset,verOffset,ix;
+
+// In Opera 15+, the true version is after "OPR/"
+if ((verOffset=nAgt.indexOf("OPR/"))!=-1) {
+ browserName = "Opera";
+ fullVersion = nAgt.substring(verOffset+4);
+}
+// In older Opera, the true version is after "Opera" or after "Version"
+else if ((verOffset=nAgt.indexOf("Opera"))!=-1) {
+ browserName = "Opera";
+ fullVersion = nAgt.substring(verOffset+6);
+ if ((verOffset=nAgt.indexOf("Version"))!=-1)
+   fullVersion = nAgt.substring(verOffset+8);
+}
+// In MSIE, the true version is after "MSIE" in userAgent
+else if ((verOffset=nAgt.indexOf("MSIE"))!=-1) {
+ browserName = "Microsoft Internet Explorer";
+ fullVersion = nAgt.substring(verOffset+5);
+}
+// In Chrome, the true version is after "Chrome"
+else if ((verOffset=nAgt.indexOf("Chrome"))!=-1) {
+ browserName = "Chrome";
+ fullVersion = nAgt.substring(verOffset+7);
+}
+// In Safari, the true version is after "Safari" or after "Version"
+else if ((verOffset=nAgt.indexOf("Safari"))!=-1) {
+ browserName = "Safari";
+ fullVersion = nAgt.substring(verOffset+7);
+ if ((verOffset=nAgt.indexOf("Version"))!=-1)
+   fullVersion = nAgt.substring(verOffset+8);
+}
+// In Firefox, the true version is after "Firefox"
+else if ((verOffset=nAgt.indexOf("Firefox"))!=-1) {
+ browserName = "Firefox";
+ fullVersion = nAgt.substring(verOffset+8);
+}
+// In most other browsers, "name/version" is at the end of userAgent
+else if ( (nameOffset=nAgt.lastIndexOf(' ')+1) <
+          (verOffset=nAgt.lastIndexOf('/')) )
+{
+ browserName = nAgt.substring(nameOffset,verOffset);
+ fullVersion = nAgt.substring(verOffset+1);
+ if (browserName.toLowerCase()==browserName.toUpperCase()) {
+  browserName = navigator.appName;
+ }
+}
+// trim the fullVersion string at semicolon/space if present
+if ((ix=fullVersion.indexOf(";"))!=-1)
+   fullVersion=fullVersion.substring(0,ix);
+if ((ix=fullVersion.indexOf(" "))!=-1)
+   fullVersion=fullVersion.substring(0,ix);
+
+majorVersion = parseInt(''+fullVersion,10);
+if (isNaN(majorVersion)) {
+ fullVersion  = ''+parseFloat(navigator.appVersion);
+ majorVersion = parseInt(navigator.appVersion,10);
+}
+
+//document.write(''
+// +'Browser name  = '+browserName+'<br>'
+// +'Full version  = '+fullVersion+'<br>'
+// +'Major version = '+majorVersion+'<br>'
+// +'navigator.appName = '+navigator.appName+'<br>'
+// +'navigator.userAgent = '+navigator.userAgent+'<br>'
+    //)
+
+
+// Send visitor to relevant pages
+if (browserName != "Chrome") {
+    window.location.href = "@Url.Action("BrowserCheck", "Login")";
+}
+
+</script>

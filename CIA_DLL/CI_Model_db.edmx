@@ -1,0 +1,418 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="CIModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="CIBranchMst">
+          <Key>
+            <PropertyRef Name="CIBranchMst_Tbl_PK" />
+          </Key>
+          <Property Name="CIBranchMst_Tbl_PK" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CBM_BranchCode" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="CBM_BranchName" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="CBM_Address" Type="varchar(max)" Nullable="false" />
+          <Property Name="CBM_RegNo" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="CBM_TVANo" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="CBM_Email" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="CBM_Tel" Type="int" />
+          <Property Name="CBM_Web" Type="varchar" MaxLength="255" />
+          <Property Name="CBM_GeneralTerms" Type="varchar" MaxLength="200" />
+          <Property Name="CBM_FooterText" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="CBM_TVAPer" Type="numeric" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="CBM_ActiveStatus" Type="varchar" MaxLength="5" Nullable="false" />
+          <Property Name="CBM_CreateBy" Type="int" Nullable="false" />
+          <Property Name="CBM_CreateOn" Type="datetime" Nullable="false" />
+          <Property Name="CBM_UpdateBy" Type="int" />
+          <Property Name="CBM_UpdateOn" Type="datetime" />
+        </EntityType>
+        <EntityType Name="CIClientEntry">
+          <Key>
+            <PropertyRef Name="CICE__ID" />
+          </Key>
+          <Property Name="CICE__ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CIclientnon_ID" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="CICE_nomclient" Type="varchar(max)" Nullable="false" />
+          <Property Name="CICE_c_adresse" Type="varchar(max)" Nullable="false" />
+          <Property Name="CICE_c_codepostale" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="CICE_c_ville" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="CICE_c_pays" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="CICE_c_courriel" Type="varchar" MaxLength="100" />
+          <Property Name="CICE_c_lignefixe_non" Type="varchar" MaxLength="100" />
+          <Property Name="CICE_c_mobile_non" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="CICE_nom_organisme" Type="varchar(max)" />
+          <Property Name="CICE_numero_enregistr_professional" Type="varchar" MaxLength="255" />
+          <Property Name="CICE_facture_adresse" Type="varchar(max)" />
+          <Property Name="CICE_o_codepostale" Type="varchar" MaxLength="200" />
+          <Property Name="CICE_o_ville" Type="varchar" MaxLength="255" />
+          <Property Name="CICE_o_pays" Type="varchar" MaxLength="50" />
+          <Property Name="CICE_o_courriel" Type="varchar" MaxLength="100" />
+          <Property Name="CICE_o_lignefixe_non" Type="varchar" MaxLength="100" />
+          <Property Name="CICE_o_mobile_non" Type="varchar" MaxLength="50" />
+          <Property Name="CICE_payment_terms" Type="varchar" MaxLength="100" />
+          <Property Name="CICE_comments" Type="varchar" MaxLength="255" />
+          <Property Name="CICE_ActiveStatus" Type="varchar" MaxLength="5" Nullable="false" />
+          <Property Name="CICE_CreateBy" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="CICE_CreateOn" Type="datetime" Nullable="false" />
+          <Property Name="CICE_UpdateBy" Type="varchar" MaxLength="50" />
+          <Property Name="CICE_UpdateOn" Type="datetime" />
+        </EntityType>
+        <EntityType Name="CIInvoiceDetail">
+          <Key>
+            <PropertyRef Name="CIID_ID" />
+          </Key>
+          <Property Name="CIID_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CIIE_invoice_no_ID" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="CIID_refernce" Type="varchar" MaxLength="255" />
+          <Property Name="CIID_n_declaration" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="CIID_intervention_taxable" Type="varchar" MaxLength="100" />
+          <Property Name="CIID_intervention_nontaxable" Type="varchar" MaxLength="100" />
+          <Property Name="CIID_at_tva_douane" Type="varchar" MaxLength="100" />
+          <Property Name="CIID_tva_perctage" Type="int" />
+          <Property Name="CIID_UpdateBy" Type="varchar" MaxLength="50" />
+          <Property Name="CIID_UpdateOn" Type="datetime" />
+        </EntityType>
+        <EntityType Name="CIInvoiceEntry">
+          <Key>
+            <PropertyRef Name="CIIE__ID" />
+          </Key>
+          <Property Name="CIIE__ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CIIE_invoice_no_ID" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="CIIE_entrd_invoice_no" Type="varchar" MaxLength="100" />
+          <Property Name="CIIE_invoice_currdate" Type="datetime" Nullable="false" />
+          <Property Name="CIIE_invoice_seldate" Type="datetime" />
+          <Property Name="CIIE_client_sel" Type="varchar(max)" Nullable="false" />
+          <Property Name="CIIE_invoice_genrated_by" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="CIIE_clientororgan_adresse" Type="varchar(max)" Nullable="false" />
+          <Property Name="CIIE_payment_trms" Type="varchar" MaxLength="100" />
+          <Property Name="CIIE_net_ht" Type="varchar" MaxLength="100" />
+          <Property Name="CIIE_tva_euro" Type="varchar" MaxLength="100" />
+          <Property Name="CIIE_net_non_taxable" Type="varchar" MaxLength="100" />
+          <Property Name="CIIE_net_douane" Type="varchar" MaxLength="100" />
+          <Property Name="CIIE_total_payment_amt" Type="int" />
+          <Property Name="CIIE_comments" Type="varchar(max)" />
+          <Property Name="CIIE_ActiveStatus" Type="varchar" MaxLength="5" Nullable="false" />
+          <Property Name="CIIE_CreateBy" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="CIIE_CreateOn" Type="datetime" Nullable="false" />
+          <Property Name="CIIE_UpdateBy" Type="varchar" MaxLength="50" />
+          <Property Name="CIIE_UpdateOn" Type="datetime" />
+        </EntityType>
+        <EntityType Name="CIUserMaster">
+          <Key>
+            <PropertyRef Name="CIUserMst_ID" />
+          </Key>
+          <Property Name="CIUserMst_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CIUM_LoginName" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="CIUM_Password" Type="varchar" MaxLength="55" Nullable="false" />
+          <Property Name="CIUM_UserName" Type="varchar" MaxLength="255" />
+          <Property Name="CIUM_UserRole" Type="varchar" MaxLength="5" />
+          <Property Name="CIUM_UserEmail" Type="varchar" MaxLength="255" />
+          <Property Name="CIUM_UserMobile" Type="varchar" MaxLength="25" />
+          <Property Name="CIUM_ActiveStatus" Type="varchar" MaxLength="5" Nullable="false" />
+          <Property Name="CIUM_CreateBy" Type="int" Nullable="false" />
+          <Property Name="CIUM_CreateOn" Type="datetime" Nullable="false" />
+          <Property Name="CIUM_UpdateBy" Type="int" />
+          <Property Name="CIUM_UpdateOn" Type="datetime" />
+        </EntityType>
+        <Function Name="ci_reportview_" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="report_typ" Type="int" Mode="In" />
+          <Parameter Name="clientName" Type="varchar" Mode="In" />
+          <Parameter Name="report_options" Type="char" Mode="In" />
+          <Parameter Name="fromdate" Type="datetime" Mode="In" />
+          <Parameter Name="enddate" Type="datetime" Mode="In" />
+        </Function>
+        <EntityContainer Name="CIModelStoreContainer">
+          <EntitySet Name="CIBranchMst" EntityType="Self.CIBranchMst" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CIClientEntry" EntityType="Self.CIClientEntry" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CIInvoiceDetail" EntityType="Self.CIInvoiceDetail" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CIInvoiceEntry" EntityType="Self.CIInvoiceEntry" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CIUserMaster" EntityType="Self.CIUserMaster" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="CIModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="CIUserMaster">
+          <Key>
+            <PropertyRef Name="CIUserMst_ID" />
+          </Key>
+          <Property Name="CIUserMst_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CIUM_LoginName" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CIUM_Password" Type="String" MaxLength="55" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CIUM_UserName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="CIUM_UserRole" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="CIUM_UserEmail" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="CIUM_UserMobile" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="CIUM_ActiveStatus" Type="String" MaxLength="5" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CIUM_CreateBy" Type="Int32" Nullable="false" />
+          <Property Name="CIUM_CreateOn" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CIUM_UpdateBy" Type="Int32" />
+          <Property Name="CIUM_UpdateOn" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityContainer Name="CIEntities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="CIUserMasters" EntityType="Self.CIUserMaster" />
+          <EntitySet Name="CIBranchMsts" EntityType="CIModel.CIBranchMst" />
+          <EntitySet Name="CIClientEntries" EntityType="CIModel.CIClientEntry" />
+          <EntitySet Name="CIInvoiceDetails" EntityType="CIModel.CIInvoiceDetail" />
+          <EntitySet Name="CIInvoiceEntries" EntityType="CIModel.CIInvoiceEntry" />
+          <FunctionImport Name="ci_reportview_" ReturnType="Collection(CIModel.ci_reportview__Result)">
+            <Parameter Name="report_typ" Mode="In" Type="Int32" />
+            <Parameter Name="clientName" Mode="In" Type="String" />
+            <Parameter Name="report_options" Mode="In" Type="String" />
+            <Parameter Name="fromdate" Mode="In" Type="DateTime" />
+            <Parameter Name="enddate" Mode="In" Type="DateTime" />
+          </FunctionImport>
+        </EntityContainer>
+        <EntityType Name="CIBranchMst">
+          <Key>
+            <PropertyRef Name="CIBranchMst_Tbl_PK" />
+          </Key>
+          <Property Name="CIBranchMst_Tbl_PK" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CBM_BranchCode" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="CBM_BranchName" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="CBM_Address" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="CBM_RegNo" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="CBM_TVANo" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="CBM_Email" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="CBM_Tel" Type="Int32" />
+          <Property Name="CBM_Web" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="CBM_GeneralTerms" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="CBM_FooterText" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="CBM_TVAPer" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="CBM_ActiveStatus" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="CBM_CreateBy" Type="Int32" Nullable="false" />
+          <Property Name="CBM_CreateOn" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CBM_UpdateBy" Type="Int32" />
+          <Property Name="CBM_UpdateOn" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="CIClientEntry">
+          <Key>
+            <PropertyRef Name="CICE__ID" />
+          </Key>
+          <Property Name="CICE__ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CIclientnon_ID" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="CICE_nomclient" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="CICE_c_adresse" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="CICE_c_codepostale" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="CICE_c_ville" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="CICE_c_pays" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CICE_c_courriel" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="CICE_c_lignefixe_non" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="CICE_c_mobile_non" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CICE_nom_organisme" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="CICE_numero_enregistr_professional" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="CICE_facture_adresse" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="CICE_o_codepostale" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="CICE_o_ville" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="CICE_o_pays" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CICE_o_courriel" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="CICE_o_lignefixe_non" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="CICE_o_mobile_non" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CICE_payment_terms" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="CICE_comments" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="CICE_ActiveStatus" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="CICE_CreateBy" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CICE_CreateOn" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CICE_UpdateBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CICE_UpdateOn" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="CIInvoiceDetail">
+          <Key>
+            <PropertyRef Name="CIID_ID" />
+          </Key>
+          <Property Name="CIID_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CIIE_invoice_no_ID" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="CIID_refernce" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="CIID_n_declaration" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="CIID_intervention_taxable" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="CIID_intervention_nontaxable" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="CIID_at_tva_douane" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="CIID_tva_perctage" Type="Int32" />
+          <Property Name="CIID_UpdateBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CIID_UpdateOn" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="CIInvoiceEntry">
+          <Key>
+            <PropertyRef Name="CIIE__ID" />
+          </Key>
+          <Property Name="CIIE__ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CIIE_invoice_no_ID" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="CIIE_entrd_invoice_no" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="CIIE_invoice_currdate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CIIE_invoice_seldate" Type="DateTime" Precision="3" />
+          <Property Name="CIIE_client_sel" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="CIIE_invoice_genrated_by" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="CIIE_clientororgan_adresse" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="CIIE_payment_trms" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="CIIE_net_ht" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="CIIE_tva_euro" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="CIIE_net_non_taxable" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="CIIE_net_douane" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="CIIE_total_payment_amt" Type="Int32" />
+          <Property Name="CIIE_comments" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="CIIE_ActiveStatus" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="CIIE_CreateBy" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CIIE_CreateOn" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CIIE_UpdateBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CIIE_UpdateOn" Type="DateTime" Precision="3" />
+        </EntityType>
+        <ComplexType Name="ci_reportview__Result">
+          <Property Type="String" Name="clientName" Nullable="false" />
+          <Property Type="Int32" Name="Total_no_transactions" Nullable="true" />
+          <Property Type="Int32" Name="Total_amt_transactions" Nullable="true" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="CIModelStoreContainer" CdmEntityContainer="CIEntities1">
+          <EntitySetMapping Name="CIUserMasters">
+            <EntityTypeMapping TypeName="CIModel.CIUserMaster">
+              <MappingFragment StoreEntitySet="CIUserMaster">
+                <ScalarProperty Name="CIUserMst_ID" ColumnName="CIUserMst_ID" />
+                <ScalarProperty Name="CIUM_LoginName" ColumnName="CIUM_LoginName" />
+                <ScalarProperty Name="CIUM_Password" ColumnName="CIUM_Password" />
+                <ScalarProperty Name="CIUM_UserName" ColumnName="CIUM_UserName" />
+                <ScalarProperty Name="CIUM_UserRole" ColumnName="CIUM_UserRole" />
+                <ScalarProperty Name="CIUM_UserEmail" ColumnName="CIUM_UserEmail" />
+                <ScalarProperty Name="CIUM_UserMobile" ColumnName="CIUM_UserMobile" />
+                <ScalarProperty Name="CIUM_ActiveStatus" ColumnName="CIUM_ActiveStatus" />
+                <ScalarProperty Name="CIUM_CreateBy" ColumnName="CIUM_CreateBy" />
+                <ScalarProperty Name="CIUM_CreateOn" ColumnName="CIUM_CreateOn" />
+                <ScalarProperty Name="CIUM_UpdateBy" ColumnName="CIUM_UpdateBy" />
+                <ScalarProperty Name="CIUM_UpdateOn" ColumnName="CIUM_UpdateOn" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CIBranchMsts">
+            <EntityTypeMapping TypeName="CIModel.CIBranchMst">
+              <MappingFragment StoreEntitySet="CIBranchMst">
+                <ScalarProperty Name="CBM_UpdateOn" ColumnName="CBM_UpdateOn" />
+                <ScalarProperty Name="CBM_UpdateBy" ColumnName="CBM_UpdateBy" />
+                <ScalarProperty Name="CBM_CreateOn" ColumnName="CBM_CreateOn" />
+                <ScalarProperty Name="CBM_CreateBy" ColumnName="CBM_CreateBy" />
+                <ScalarProperty Name="CBM_ActiveStatus" ColumnName="CBM_ActiveStatus" />
+                <ScalarProperty Name="CBM_TVAPer" ColumnName="CBM_TVAPer" />
+                <ScalarProperty Name="CBM_FooterText" ColumnName="CBM_FooterText" />
+                <ScalarProperty Name="CBM_GeneralTerms" ColumnName="CBM_GeneralTerms" />
+                <ScalarProperty Name="CBM_Web" ColumnName="CBM_Web" />
+                <ScalarProperty Name="CBM_Tel" ColumnName="CBM_Tel" />
+                <ScalarProperty Name="CBM_Email" ColumnName="CBM_Email" />
+                <ScalarProperty Name="CBM_TVANo" ColumnName="CBM_TVANo" />
+                <ScalarProperty Name="CBM_RegNo" ColumnName="CBM_RegNo" />
+                <ScalarProperty Name="CBM_Address" ColumnName="CBM_Address" />
+                <ScalarProperty Name="CBM_BranchName" ColumnName="CBM_BranchName" />
+                <ScalarProperty Name="CBM_BranchCode" ColumnName="CBM_BranchCode" />
+                <ScalarProperty Name="CIBranchMst_Tbl_PK" ColumnName="CIBranchMst_Tbl_PK" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CIClientEntries">
+            <EntityTypeMapping TypeName="CIModel.CIClientEntry">
+              <MappingFragment StoreEntitySet="CIClientEntry">
+                <ScalarProperty Name="CICE_UpdateOn" ColumnName="CICE_UpdateOn" />
+                <ScalarProperty Name="CICE_UpdateBy" ColumnName="CICE_UpdateBy" />
+                <ScalarProperty Name="CICE_CreateOn" ColumnName="CICE_CreateOn" />
+                <ScalarProperty Name="CICE_CreateBy" ColumnName="CICE_CreateBy" />
+                <ScalarProperty Name="CICE_ActiveStatus" ColumnName="CICE_ActiveStatus" />
+                <ScalarProperty Name="CICE_comments" ColumnName="CICE_comments" />
+                <ScalarProperty Name="CICE_payment_terms" ColumnName="CICE_payment_terms" />
+                <ScalarProperty Name="CICE_o_mobile_non" ColumnName="CICE_o_mobile_non" />
+                <ScalarProperty Name="CICE_o_lignefixe_non" ColumnName="CICE_o_lignefixe_non" />
+                <ScalarProperty Name="CICE_o_courriel" ColumnName="CICE_o_courriel" />
+                <ScalarProperty Name="CICE_o_pays" ColumnName="CICE_o_pays" />
+                <ScalarProperty Name="CICE_o_ville" ColumnName="CICE_o_ville" />
+                <ScalarProperty Name="CICE_o_codepostale" ColumnName="CICE_o_codepostale" />
+                <ScalarProperty Name="CICE_facture_adresse" ColumnName="CICE_facture_adresse" />
+                <ScalarProperty Name="CICE_numero_enregistr_professional" ColumnName="CICE_numero_enregistr_professional" />
+                <ScalarProperty Name="CICE_nom_organisme" ColumnName="CICE_nom_organisme" />
+                <ScalarProperty Name="CICE_c_mobile_non" ColumnName="CICE_c_mobile_non" />
+                <ScalarProperty Name="CICE_c_lignefixe_non" ColumnName="CICE_c_lignefixe_non" />
+                <ScalarProperty Name="CICE_c_courriel" ColumnName="CICE_c_courriel" />
+                <ScalarProperty Name="CICE_c_pays" ColumnName="CICE_c_pays" />
+                <ScalarProperty Name="CICE_c_ville" ColumnName="CICE_c_ville" />
+                <ScalarProperty Name="CICE_c_codepostale" ColumnName="CICE_c_codepostale" />
+                <ScalarProperty Name="CICE_c_adresse" ColumnName="CICE_c_adresse" />
+                <ScalarProperty Name="CICE_nomclient" ColumnName="CICE_nomclient" />
+                <ScalarProperty Name="CIclientnon_ID" ColumnName="CIclientnon_ID" />
+                <ScalarProperty Name="CICE__ID" ColumnName="CICE__ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CIInvoiceDetails">
+            <EntityTypeMapping TypeName="CIModel.CIInvoiceDetail">
+              <MappingFragment StoreEntitySet="CIInvoiceDetail">
+                <ScalarProperty Name="CIID_UpdateOn" ColumnName="CIID_UpdateOn" />
+                <ScalarProperty Name="CIID_UpdateBy" ColumnName="CIID_UpdateBy" />
+                <ScalarProperty Name="CIID_tva_perctage" ColumnName="CIID_tva_perctage" />
+                <ScalarProperty Name="CIID_at_tva_douane" ColumnName="CIID_at_tva_douane" />
+                <ScalarProperty Name="CIID_intervention_nontaxable" ColumnName="CIID_intervention_nontaxable" />
+                <ScalarProperty Name="CIID_intervention_taxable" ColumnName="CIID_intervention_taxable" />
+                <ScalarProperty Name="CIID_n_declaration" ColumnName="CIID_n_declaration" />
+                <ScalarProperty Name="CIID_refernce" ColumnName="CIID_refernce" />
+                <ScalarProperty Name="CIIE_invoice_no_ID" ColumnName="CIIE_invoice_no_ID" />
+                <ScalarProperty Name="CIID_ID" ColumnName="CIID_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CIInvoiceEntries">
+            <EntityTypeMapping TypeName="CIModel.CIInvoiceEntry">
+              <MappingFragment StoreEntitySet="CIInvoiceEntry">
+                <ScalarProperty Name="CIIE_UpdateOn" ColumnName="CIIE_UpdateOn" />
+                <ScalarProperty Name="CIIE_UpdateBy" ColumnName="CIIE_UpdateBy" />
+                <ScalarProperty Name="CIIE_CreateOn" ColumnName="CIIE_CreateOn" />
+                <ScalarProperty Name="CIIE_CreateBy" ColumnName="CIIE_CreateBy" />
+                <ScalarProperty Name="CIIE_ActiveStatus" ColumnName="CIIE_ActiveStatus" />
+                <ScalarProperty Name="CIIE_comments" ColumnName="CIIE_comments" />
+                <ScalarProperty Name="CIIE_total_payment_amt" ColumnName="CIIE_total_payment_amt" />
+                <ScalarProperty Name="CIIE_net_douane" ColumnName="CIIE_net_douane" />
+                <ScalarProperty Name="CIIE_net_non_taxable" ColumnName="CIIE_net_non_taxable" />
+                <ScalarProperty Name="CIIE_tva_euro" ColumnName="CIIE_tva_euro" />
+                <ScalarProperty Name="CIIE_net_ht" ColumnName="CIIE_net_ht" />
+                <ScalarProperty Name="CIIE_payment_trms" ColumnName="CIIE_payment_trms" />
+                <ScalarProperty Name="CIIE_clientororgan_adresse" ColumnName="CIIE_clientororgan_adresse" />
+                <ScalarProperty Name="CIIE_invoice_genrated_by" ColumnName="CIIE_invoice_genrated_by" />
+                <ScalarProperty Name="CIIE_client_sel" ColumnName="CIIE_client_sel" />
+                <ScalarProperty Name="CIIE_invoice_seldate" ColumnName="CIIE_invoice_seldate" />
+                <ScalarProperty Name="CIIE_invoice_currdate" ColumnName="CIIE_invoice_currdate" />
+                <ScalarProperty Name="CIIE_entrd_invoice_no" ColumnName="CIIE_entrd_invoice_no" />
+                <ScalarProperty Name="CIIE_invoice_no_ID" ColumnName="CIIE_invoice_no_ID" />
+                <ScalarProperty Name="CIIE__ID" ColumnName="CIIE__ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="ci_reportview_" FunctionName="CIModel.Store.ci_reportview_">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="CIModel.ci_reportview__Result">
+                <ScalarProperty Name="clientName" ColumnName="clientName" />
+                <ScalarProperty Name="Total_no_transactions" ColumnName="Total_no_transactions" />
+                <ScalarProperty Name="Total_amt_transactions" ColumnName="Total_amt_transactions" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -1,0 +1,91 @@
+﻿
+@{
+    ViewBag.Title = "BrowserCheck";
+    Layout = "~/Views/Shared/_CommonLayout.cshtml";
+}
+
+<center>
+    <br /><br />
+    <div style="width: 40%; margin-top: 9.75%">
+        <div class="Bpan grad">
+            <div id="Content1" class="Bpan-body" style="line-height: 11px; margin-top: 17px;">
+                <table>
+                    <tr><td style="font-size:45px">&nbsp;</td></tr>
+                    <tr>
+                        <td align="center" style="text-align: center; font-family: 'Segoe UI'; padding-bottom: 20px; ">
+                            <i style="font-size: 58px" class="fa fa-warning"></i>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td align="center" style="text-align: center; font-family: 'Segoe UI'; padding-bottom: 20px; font-size: 12pt; ">
+                            <span style="margin-top: 10px; font-family: 'Segoe UI'; font-size: 12pt; color:red;">Please use chrome browser for better user experience.</span>
+                        </td>
+                    </tr>
+                    @*<tr>
+                            <td style="text-align: center; font-family: 'Segoe UI'; font-size: 12pt; ">
+                                <a id="def" href='@Url.Action("LoginView", "Security")'> Click here to Login again</a>
+                            </td>
+                        </tr>*@
+                </table>
+            </div>
+        </div>
+
+    </div>
+</center>
+
+
+<style>
+    #tbldata_wrapper {
+        background: #F1F1F1;
+    }
+
+    #tbldata_processing {
+        display: none;
+    }
+
+    .Bpan {
+        font-size: 12pt;
+        margin-bottom: 8px;
+        font-family: 'Segoe UI';
+        min-height: 200px;
+        background-color: #ffffff;
+        border: 1px solid transparent;
+        border-color: #C5C5C5;
+        border-radius: 0px;
+        -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+        box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+    }
+
+    .Bpan-heading {
+        font-size: 12pt;
+        padding: 7px 5px;
+        font-family: 'Segoe UI';
+        border-bottom: 1px solid transparent;
+        color: #333333;
+        background-color: #E1E1E1;
+        border-color: #D4D4D4;
+    }
+
+    .Bpan-body {
+        padding: 5px;
+        font-size: 12pt;
+        font-family: 'Segoe UI';
+    }
+
+    .btnSelect {
+        background-color: #333;
+        color: #DDDDDD;
+        text-decoration: none;
+    }
+
+    .grad {
+        background: red; /* For browsers that do not support gradients */
+        background: -webkit-linear-gradient(left top, #ffffff, #ffffff); /* For Safari 5.1 to 6.0 */
+        background: -o-linear-gradient(bottom right, #ffffff, #ffffff); /* For Opera 11.1 to 12.0 */
+        background: -moz-linear-gradient(bottom right, #ffffff, #ffffff); /* For Firefox 3.6 to 15 */
+        background: linear-gradient(to bottom right, #ffffff, #ffffff); /* Standard syntax */
+    }
+</style>
+
+
+

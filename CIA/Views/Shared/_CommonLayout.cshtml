@@ -1,0 +1,553 @@
+﻿
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+@{
+    var pageName = ViewContext.RouteData.Values["action"].ToString();
+    if (pageName.ToLower() == "home")
+    {
+        pageName = "Dashboard";
+    }
+    else if (pageName.ToLower() == "cliententry")
+    {
+        pageName = "ClientEntry";
+    }
+    else if (pageName.ToLower() == "invoiceentry")
+    {
+        pageName = "InvoiceEntry";
+    }
+    var ActionName = HttpContext.Current.Request.RequestContext.RouteData.Values["action"].ToString();
+}
+
+<head>
+    <title>@System.Configuration.ConfigurationManager.AppSettings.Get("Logo")</title>
+    <link rel="shortcut icon" href="~/Images/Icons/user-logo.png" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width" />
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.6.3/css/all.css'
+          integrity='sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/' crossorigin='anonymous'>
+
+    <link href="~/Styles/UserStyles/button_style.css" rel="stylesheet" />
+    <link href="~/Styles/UserStyles/control_style.css" rel="stylesheet" />
+    <link href="~/Styles/UserStyles/table_style.css" rel="stylesheet" />
+    <link href="~/Styles/UserStyles/Alertbox.css" rel="stylesheet" />
+    <link href="~/Styles/UserStyles/ProgressBar.css" rel="stylesheet" />
+
+    <link href="~/Styles/Common/bootstrap-theme.min.css" rel="stylesheet" />
+    <link href="~/Styles/Common/bootstrap-theme.css" rel="stylesheet" />
+    <link href="~/Styles/Common/bootstrap.css" rel="stylesheet" />
+    <link href="~/Styles/Common/bootstrap.min.css" rel="stylesheet" />
+    <script src="~/Scripts/Common/jquery.min.js"></script>
+    <script src="~/Scripts/Common/bootstrap.min.js"></script>
+    <script src="~/Scripts/Common/Alertbox.js"></script>
+    <script src="~/Scripts/Common/angular.min.js"></script>
+
+    @*<link href="~/Styles/Common/font-awesome.min.css" rel="stylesheet" />*@
+    @*<link href="~/Styles/Common/bootstrap.css" rel="stylesheet" />*@
+    @*<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.css">*@
+
+
+    @*<script src="~/Scripts/Common/bootstrap.min.js"></script>*@
+
+
+    <style>
+        [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+            display: none !important;
+        }
+        /* For Firefox */
+        input[type='number'] {
+            -moz-appearance: textfield;
+        }
+        /* Webkit browsers like Safari and Chrome */
+        input[type=number]::-webkit-inner-spin-button,
+        input[type=number]::-webkit-outer-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- AlertBox -->
+    <div id="MessageBox" class="modal_dialog" role="dialog" ng-hide="true">
+        <div class="modal-dialog" style="margin-top:8%;">
+            <!-- Modal content-->
+            <div id="ModalContent" class="modal-content" style="border-radius: 0px; width: 375px">
+                <div class="modal-header" id="Msgheader" style="height: 30px; border-radius: 0px; color: whitesmoke; padding: 3px; font-family: Segoe UI; font-size: 12pt; font-weight: 600; vertical-align: middle;">
+                    <span id="Msgtitle" class="modal-title" style="float:left; margin-left:1%; color:black;" ng-hide="true"></span>
+                    <img onclick="HideMessageBox()" style="height: 15px; margin-top:3px; float: right;" src="~/Images/Icons/ic_action_cancel.png" />
+                </div>
+                <div class="modal-body" style=" height: 70px; text-align: left; text-space-collapse: collapse; padding: 10px; font-family: 'Segoe UI'; vertical-align: middle; background-color: white; overflow-y: auto;">
+                    <div class="col-sm-1" style="padding: 0px; ">
+                        <img alt="icon" id="Msg-Icon" style="height: 40px; width: 40px; margin-top:-4px; margin-left:-7px" />
+                    </div>
+                    <div class="col-sm-11" style="vertical-align: middle; min-height: 40px; padding-left: 12px; padding-top: 15px; font-family: 'Segoe UI'; padding-right: 5px;">
+                        <span id="Msg-body" style="text-align: justify; text-space-collapse: collapse; vertical-align: middle; font-size: 14pt; font-family: 'Segoe UI';"></span>
+                    </div>
+                </div>
+                <div class="modal-footer" align="right" style="border-bottom-left-radius: 0px; border-bottom-right-radius: 0px; background-color: white; margin-bottom: 5px; padding-top: 0px; padding-right: 7px; border: none; ">
+                    <input id="Msgok" class="btn btn-sm" type="button" value="OK" onclick="ReloadPage(); return false;" style="width: 13%; font-weight: 600; border-radius: 0px; font-family: 'Segoe UI'; font-size: 10pt;" />
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @*information to view invoice*@
+    <div id="InfoMessageBox" class="modal_dialog" role="dialog" ng-hide="true">
+        <div class="modal-dialog" style="margin-top:8%;">
+            <!-- Modal content-->
+            <div id="ModalContent" class="modal-content" style="border-radius: 0px; width: 375px">
+                <div class="modal-header" id="infoMsgheader" style="height: 30px; border-radius: 0px; color: whitesmoke; padding: 3px; font-family: Segoe UI; font-size: 12pt; font-weight: 600; vertical-align: middle;">
+                    <span id="infoMsgtitle" class="modal-title" style="float:left; margin-left:1%; color:black;" ng-hide="true"></span>
+                    <img onclick="HideInfo_MessageBox()" style="height: 15px; margin-top:3px; float: right;" src="~/Images/Icons/ic_action_cancel.png" />
+                </div>
+                <div class="modal-body" style=" height: 70px; text-align: left; text-space-collapse: collapse; padding: 10px; font-family: 'Segoe UI'; vertical-align: middle; background-color: white; overflow-y: auto;">
+                    <div class="col-sm-1" style="padding: 0px; ">
+                        <img alt="icon" id="infoMsg-Icon" style="height: 40px; width: 40px; margin-top:-4px; margin-left:-7px" />
+                    </div>
+                    <div class="col-sm-11" style="vertical-align: middle; min-height: 40px; padding-left: 12px; padding-top: 0px; font-family: 'Segoe UI'; padding-right: 5px;">
+                        <span id="infoMsg-body" style="text-align: justify; text-space-collapse: collapse; vertical-align: middle; font-size: 14pt; font-family: 'Segoe UI';"></span>
+                    </div>
+                </div>
+                <div class="modal-footer" align="right" style="border-bottom-left-radius: 0px; border-bottom-right-radius: 0px; background-color: white; margin-bottom: 5px; padding-top: 7px; padding-right: 7px; border: none; ">
+                    <button id="infBtn_Yes" onclick="showInvoiceCust()" class="odt-btn" type="button" value="YES" style="width: 13%; font-weight: 600; font-family: 'Segoe UI'; font-size: 10pt; border-radius: 0px; ">
+                        YES
+                    </button>
+                    &nbsp;
+                    <button id="infBtn_No" onclick="HideInfo_MessageBox()" class="odt-btn" type="button" value="NO" style="width: 13%; font-weight: 600; font-family: 'Segoe UI'; font-size: 10pt; border-radius: 0px; ">
+                        NO
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ProgressLoader-->
+    <div id="ProgressBar" align="center" class="backscreen" ng-hide="disp" style="z-index:500000">
+        <img src="~/Images/Common/dot_load.gif" id="loadimg" />
+    </div>
+    <div id="ProgressBarExtended" align="center" class="backscreen" ng-hide="disp">
+        <div>
+            <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+            <label id="minutes" style="font-size:x-large;color:white">00</label><label style="font-size: x-large; color: white">:</label><label id="seconds" style="font-size: x-large; color: white">00</label><br />
+            @*<img src="~/Images/Common/dot_load.gif" id="loadimg" /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />*@
+            @*<label style="font-size: larger; color: ivory; ">Please be patient, it may take several seconds to load data from many data sources…</label>*@
+        </div>
+    </div>
+
+
+    <!--Start Show Session Expire Warning Popup here -->
+    <div id="SessionExpiry" class="modal_dialog" role="dialog" style="z-index: 5000;">
+        <div class="modal-dialog" style="margin-top:8%;">
+            <div id="ModalContentSession" class="modal-content" style="border-radius:0px;">
+                <div class="modal-header" id="Sessionheader" style="height: 35px; border-radius: 0px; color: whitesmoke; padding: 6px; font-family: 'Segoe UI'; font-size: 12pt; font-weight: 600; vertical-align: middle; ">
+                    <span id="Sessiontitle" class="modal-title" style="float:left; margin-left:1%;"> Session Warning </span>
+                </div>
+                <div class="modal-body" style="height: 70px; text-align: left; text-space-collapse: collapse; padding: 10px; font-family: 'Segoe UI'; vertical-align: middle; background-color: white; overflow-y: auto;">
+                    <div class="col-sm-1" style="padding: 0px; ">
+                        <img alt="icon" id="SessionIcon" style="height: 38px; width: 34px;" />
+                    </div>
+                    <div class="col-sm-11" style="vertical-align: middle; min-height: 40px; padding-left: 12px; padding-top: 5px; font-family: 'Segoe UI'; padding-right: 5px;">
+                        <span id="Sessionbody" style="text-align: justify; text-space-collapse: collapse; vertical-align: middle; font-size: 10.5pt; font-family: 'Segoe UI';"></span>
+                    </div>
+                </div>
+                <div class="modal-footer" align="right" style="border-bottom-left-radius: 0px; border-bottom-right-radius: 0px; background-color: white; margin-bottom: 5px; padding-top: 7px; padding-right: 7px; border: none; ">
+                    <button id="Btn_Yes" class="btn btn-sm" type="button" value="YES" style="width: 13%; font-weight: 600; font-family: 'Segoe UI'; font-size: 10pt; border-radius: 0px; ">
+                        YES
+                    </button>
+                    &nbsp;
+                    <button id="Btn_No" onclick="location.href='@Url.Action("Login","Security")'" class="btn btn-sm" type="button" value="NO" style="width: 13%; font-weight: 600; font-family: 'Segoe UI'; font-size: 10pt; border-radius: 0px; ">
+                        NO
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--End Show Session Expire Warning Popup here -->
+    <style>
+        /*Menu dropdown styles*/
+
+
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f1f1f1;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 100000;
+            text-align: initial;
+        }
+
+            .dropdown-content a {
+                color: black;
+                /*padding: 12px 16px;*/
+                padding: 4px 24px;
+                text-decoration: none;
+                display: block;
+            }
+
+                .dropdown-content a:hover {
+                    background-color: #ddd;
+                }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        .dropdown:hover .dropbtn {
+            /*background-color: #3e8e41;*/
+        }
+    </style>
+
+
+
+    <div id="wrapper">
+        <header style="height:38px;">
+
+            @*<img id="imgid" src="~/Images/Common/LenovoLogo-POS-DarkBlue.png" style="height: 44px;width: 140px;" />
+                <span style="letter-spacing: 1px; font-size: 24px; vertical-align: middle; height: 7.375%; text-align: left; font-weight: normal; font-family: Segoe UI; color: #000000;">
+                    @System.Configuration.ConfigurationManager.AppSettings["SiteHeader"].ToString()
+                </span>*@
+            <img id="imgid" src="~/Images/Icons/OG_Facebook.png" style=" width: 99px; height:33px;" />
+            <span style="font-size: 26px; vertical-align: middle; height: 20px; text-align: left; font-weight: normal; font-family: Segoe UI; color: #000000; ">
+
+                @System.Configuration.ConfigurationManager.AppSettings["SiteHeader"].ToString()
+            </span>
+            @*<img id="imgid" src="~/Images/Lenovologo.png" style="height: 60px; width: 180px;" />
+                <span style="font-size: 24px; vertical-align: middle; height: 9.375%; text-align: left; font-weight: normal; font-family: Segoe UI; color: #000000;">
+                    &nbsp;@System.Configuration.ConfigurationManager.AppSettings.Get("SiteHeader")
+                </span>*@
+            @*@if (Session["ad_id"] != null && Session["ad_id"] != "")
+                {*@
+            @*<span style="float: right; vertical-align: bottom; padding-top: 1%; height: 7.375%; padding-right: 20px;">*@
+            <span style="float: right; vertical-align: bottom; padding-top: 5px; height: 33px; padding-right: 10px;">
+                <img src="~/Images/Icons/user-logo.png" style="margin-bottom: 5px; height:34px;" />
+                @*<span id="usrname" style="font-size: 13px; color: black;" data-toggle="tooltip" title="UserName">*@
+                <span id="usrname" style="font-size: 13px; color: black;" data-toggle="tooltip" title="UserName">
+                    @*@Session["UsrName"].ToString()*@
+                </span>
+                <a href="@Url.Action("Login", "Security")" class="square-btn-adjust" data-toggle="tooltip" title="Logout">
+                    <img src="~/Images/Icons/ic_action_exit.png" style=" width: 24px; padding-bottom: 2px;" />
+                </a>
+            </span>
+            @*<span style="float: right; vertical-align: bottom; padding-top: 1%; height: 7.375%; padding-right: 20px;">
+                    <img src="~/Images/Icons/user-logo.png" style="margin-bottom: 5px; height:22px;" />
+                    <span id="usrname" style="font-size: 13px; color: black;" data-toggle="tooltip" title="UserName">
+                        @Session["Fullname"].ToString()
+                    </span>
+                    <a href="@Url.Action("Logout", "Security")" class="square-btn-adjust" data-toggle="tooltip" title="Logout">
+                        <img src="~/Images/Icons/ic_action_exit.png" style=" width: 24px;" />
+                    </a>
+                </span>*@
+            @*}*@
+
+
+        </header>
+
+        <div id="page-wrapper" class="page-wrapper-cls" style="background: #f3f3f3 !important; margin-left: 0px;">
+            <div class="row" style="margin-left: 0px; margin-right:0px;">
+                <div class="headerpartall" style="margin-top: 0px; height: 48px; background-color: #595959;">
+
+                    <table border="0" style="width:100%; border:none;">
+                        <tr style="line-height: 2;">
+                            <td>
+                                <span id="pagetitle" style=" letter-spacing: 1px; font-size: 24px; color: #fff; line-height: 48px; margin-left: 9px;">@ViewBag.Title</span>
+                            </td>
+
+                            @*@if (Session["UsrName"] != null)
+                                {*@
+
+                            <td id="dshboard" align="center" valign="middle" style=" text-align: center; float: right; border: none;">
+                                @if (pageName != "ClientEntry" && pageName != "Dashboard" && pageName != "Report")
+                                {
+                                    <a href="@Url.Action("ClientEntry", "ClientEntry", "frmViewCLK")" style="font-size: 24px; margin-right: 15px;">
+                                        <i id="ic_ca" class="fa fa-address-card" style="color: white" aria-hidden="true" title="Client Entry"></i>
+                                    </a>
+                                }
+                                @if (pageName != "InvoiceEntry" && pageName != "Dashboard" && pageName != "Report")
+                                {
+                                    <a href="@Url.Action("InvoiceEntry", "InvoiceEntry")" style="font-size: 24px; margin-right: 15px;">
+                                        <i id="ic_ca" class="fa fa-pencil-square-o" style="color: white" aria-hidden="true" title="Invoice Entry"></i>
+                                    </a>
+                                }
+                            </td>
+                            @*}*@
+
+                            @if (pageName != "Dashboard")
+                            {
+                                <td id="dshboard" align="center" valign="middle" style="text-align: center; width:25%; float:right; border: none;">
+                                    <a href="@Url.Action("Home", "Dashboard")" title="Dashboard" style="font-size:24px;">
+                                        <i id="ic_dash" class="fa fa-home" style="color: white" aria-hidden="true"></i>
+                                    </a>
+                                </td>
+                            }
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div>
+
+                <div id="page-inner">
+                    @RenderBody()
+                    @RenderSection("scripts", required: false)
+                </div>
+
+            </div>
+        </div>
+    </div>
+    @*<div class="content_Login" id="id_content" style="width: 100%; padding: 5px; overflow: auto; height: 1vh;">
+                 @RenderBody()
+        </div>*@
+    <footer class="footer" style="font-size: 12px; background-color: #fff; color: black; margin-top: 0px; ">
+        <span>@System.Configuration.ConfigurationManager.AppSettings.Get("Label") - @DateTime.Now.Year - All rights reserved.</span>
+    </footer>
+
+</body>
+</html>
+@Html.Hidden("exitURL", Url.Action("BrowserTabTExit", "Security"))
+@Html.Hidden("Icon_Error", Url.Content("~/Images/Alertbox/icon-close.png"))
+@Html.Hidden("Icon_Success", Url.Content("~/Images/Alertbox/icon-success.png"))
+@Html.Hidden("Icon_Warning", Url.Content("~/Images/Alertbox/icon-warning.png"))
+@Html.Hidden("Icon_Info", Url.Content("~/Images/Alertbox/icon_info.png"))
+
+
+<script>
+    var reportLoad = false;
+    var validNavigation = false;
+    var exitURL = document.getElementById("exitURL").value;
+    function endSession() {
+
+        // Browser or broswer tab is closed
+
+        $.ajax({ url: exitURL });
+    }
+
+
+    function wireUpEvents() {
+
+        //window.onbeforeunload = function (evt) {
+        //    var message = 'Did you remember to download your form?';
+        //    if (typeof evt == 'undefined') {
+        //        evt = window.event;
+        //    }
+        //    if (evt) {
+        //        evt.returnValue = message;
+        //    }
+
+        //    return message;
+        ////}
+
+        window.onbeforeunload = function () {
+            if (!validNavigation && !reportLoad) {
+                //endSession();
+            }
+            reportLoad = false;
+        }
+
+        // Attach the event keypress to exclude the F5 refresh
+        $(document).bind('keypress', function (e) {
+            if (e.keyCode == 116) {
+                validNavigation = true;
+            }
+        });
+
+        // Attach the event click for all links in the page
+        $("a").bind("click", function () {
+            validNavigation = true;
+        });
+
+        // Attach the event submit for all forms in the page
+        $("form").bind("submit", function () {
+            validNavigation = true;
+        });
+
+        // Attach the event click for all inputs in the page
+        $("input[type=submit]").bind("click", function () {
+            validNavigation = true;
+        });
+        window.onhashchange = function () {
+            validNavigation = true;//reload or refresh
+        }
+
+    }
+    // Wire up the events as soon as the DOM tree is ready
+    $(document).ready(function () {
+        wireUpEvents();
+    });
+</script>
+
+@if (pageName.ToString().ToLower() != "Login" && pageName.ToString().ToLower() != "SessionExpired")
+{
+    string sTargetURLForSessionTimeout = Url.Action("SessionExpired", "Security");
+    double iNumberOfMinutesBeforeSessionTimeoutToWarnUser = double.Parse(System.Configuration.ConfigurationManager.AppSettings["SessionWarning"].ToString());
+    double iSessionTimeoutInMinutes = Session.Timeout;
+    double iWarningTimeoutInMinutes = iSessionTimeoutInMinutes - iNumberOfMinutesBeforeSessionTimeoutToWarnUser;
+    double iWarningTimeoutInMilliseconds = iWarningTimeoutInMinutes * 60 * 1000;
+    double iSessionTimeoutInMilliseconds = iSessionTimeoutInMinutes * 60 * 1000;
+
+    <script type="text/javascript">
+            var timedout = null;
+            var warning = null;
+            var seconds = null;
+            var t = null;
+            var countdownTimer = null;
+            var msg_body = null;
+
+            $(document).ready(function () {
+                BodyOnLoad();
+                $('#SessionExpiry').hide();
+                var seconds = '@iSessionTimeoutInMilliseconds' / 1000;
+                t = setInterval(function () {
+                    var minutes = Math.round((seconds - 30) / 60);
+                    var remainingSeconds = seconds % 60;
+                    if (minutes < 10) {
+                        minutes = "0" + minutes;
+                    }
+                    if (remainingSeconds < 10) {
+                        remainingSeconds = "0" + remainingSeconds;
+                    }
+                    // document.getElementById('seconds').innerHTML = minutes + ":" + remainingSeconds;
+                    if (seconds == 0) {
+                        //clearInterval(countdownTimer);
+                    }
+                    else {
+                        seconds--;
+                    }
+                }, 1000);
+            });
+
+            function BodyOnLoad() {
+                if (timedout != null && warning != null) {
+                    window.clearTimeout(timedout);
+                    window.clearTimeout(warning);
+                }
+                timedout = setTimeout('ShowSessionTimeoutWarning()', '@iWarningTimeoutInMilliseconds');
+                warning = setTimeout('ShowSessionExpiredNotification()', '@iSessionTimeoutInMilliseconds');
+            }
+
+            function secondPassed() {
+                var minutes = Math.round((seconds - 30) / 60);
+                var remainingSeconds = seconds % 60;
+                if (remainingSeconds < 10) {
+                    remainingSeconds = "0" + remainingSeconds;
+                }
+                document.getElementById("Sessionbody").innerHTML = 'Your session will expire in <b>' + minutes + ":" + remainingSeconds + '</b> minutes, press <b>YES</b> to remain logged in or press <b>NO</b> to log off.';
+                if (seconds == 0) {
+                    //clearInterval(countdownTimer);
+                }
+                else {
+                    seconds--;
+                }
+            }
+
+            function ShowSessionTimeoutWarning() {
+                window.focus();
+                seconds = 60 * '@Convert.ToInt32(System.Configuration.ConfigurationManager.AppSettings["SessionWarning"].ToString())';
+                secondPassed();
+                clearInterval(countdownTimer);
+                countdownTimer = setInterval('secondPassed()', 1000);
+                SessionTimeOut("E", "Session Warning", "");
+            }
+
+            //Notify the user that his session HAS expired.
+            function ShowSessionExpiredNotification() {
+                window.location = '@sTargetURLForSessionTimeout';
+            }
+
+            function ResetClientSideSessionTimers() {
+                console.log('ResetClientSideSessionTimers Called');
+                @{
+                    iNumberOfMinutesBeforeSessionTimeoutToWarnUser = double.Parse(System.Configuration.ConfigurationManager.AppSettings["SessionWarning"].ToString());
+                    iSessionTimeoutInMinutes = Session.Timeout;
+                    iWarningTimeoutInMinutes = iSessionTimeoutInMinutes - iNumberOfMinutesBeforeSessionTimeoutToWarnUser;
+                    iWarningTimeoutInMilliseconds = iWarningTimeoutInMinutes * 60 * 1000;
+                    iSessionTimeoutInMilliseconds = iSessionTimeoutInMinutes * 60 * 1000;
+                }
+                $('#SessionExpiry').hide();
+                keepAlive();
+                window.clearTimeout(t);
+                var seconds = '@iSessionTimeoutInMilliseconds' / 1000;
+                t = setInterval(function () {
+                    var minutes = Math.round((seconds - 30) / 60);
+                    var remainingSeconds = seconds % 60;
+                    if (remainingSeconds < 10) {
+                        remainingSeconds = "0" + remainingSeconds;
+                    }
+                    if (seconds == 0) {
+                        //clearInterval(countdownTimer);
+                    }
+                    else {
+                        seconds--;
+                    }
+                }, 1000);
+                if (timedout != null && warning != null) {
+                    window.clearTimeout(timedout);
+                    window.clearTimeout(warning);
+                }
+                timedout = setTimeout('ShowSessionTimeoutWarning()', '@iWarningTimeoutInMilliseconds');
+                warning = setTimeout('ShowSessionExpiredNotification()', '@iSessionTimeoutInMilliseconds');
+                return false;
+            }
+            function keepAlive() {
+                var xmlHttp = null;
+                xmlHttp = new XMLHttpRequest();
+                //open(method, url, async, username, password)
+                xmlHttp.open("GET", '@Url.Action("ResetSession", "Security")', true);
+                xmlHttp.send(null);
+            }
+
+            //to to set current page menu icon active
+            $(function () {
+                setNavigation();
+            });
+
+            function setNavigation() {
+                var path = window.location.pathname;
+                path = path.replace(/\/$/, "");
+                path = decodeURIComponent(path);
+
+                $(".menu_icon").each(function () {
+                    var href = $(this).attr('href');
+                    if (path.substring(0, href.length) === href) {
+                        if (path.includes("/Security/UserAccess"))
+                            $(this).addClass('menu_active');
+                        else
+                            $(this).addClass('menu_list_icon');
+                    }
+                });
+            }
+
+            //Loader timer codes
+            var minutesLabel = document.getElementById("minutes");
+            var secondsLabel = document.getElementById("seconds");
+            var totalSeconds = 0;
+            setInterval(setTime, 1000);
+
+            function setTime() {
+                ++totalSeconds;
+                secondsLabel.innerHTML = pad(totalSeconds % 60);
+                minutesLabel.innerHTML = pad(parseInt(totalSeconds / 60));
+            }
+
+            function pad(val) {
+                var valString = val + "";
+                if (valString.length < 2) {
+                    return "0" + valString;
+                } else {
+                    return valString;
+                }
+            }
+
+            window.onbeforeunload = WindowCloseHanlder;
+            function WindowCloseHanlder() {
+                window.alert('My Window is reloading');
+            }
+    </script>
+}
+
+

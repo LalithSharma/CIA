@@ -1,0 +1,34 @@
+-----------Exception Details on  2/14/2023 7:22:45 PM-----------------
+-------------------------------------------------------------------------------------
+
+
+
+Log Written Date: 2/14/2023 7:22:45 PM
+
+Logged User Full Name : Administrator
+
+Logged Username : aUser
+
+User Role : u
+
+Error Location : CIA_BLL.Repository.InvoiceRepository
+
+Error Line No : ine 272
+
+Error Class: LicenseException
+
+Exception Type: OfficeOpenXml.LicenseException
+
+Error Message : Please set the ExcelPackage.LicenseContext property. See https://epplussoftware.com/developers/licenseexception
+
+Error Page Url: https://localhost:44312/InvoiceEntry/onClk_IEExcel
+
+Exception : OfficeOpenXml.LicenseException: Please set the ExcelPackage.LicenseContext property. See https://epplussoftware.com/developers/licenseexception
+   at CIA_BLL.Repository.InvoiceRepository.Excel_formatting_cmpled(DataTable dt, String exl_name) in C:\project\workout\CIA\CIA_BLL\Repository\InvoiceRepository.cs:line 493
+   at CIA_BLL.Repository.InvoiceRepository.InvoicEntry_ExcelDwn(String excel_name, String tab_value) in C:\project\workout\CIA\CIA_BLL\Repository\InvoiceRepository.cs:line 272
+
+
+--------------------------------*End*------------------------------------------
+
+
+

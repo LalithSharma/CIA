@@ -1,0 +1,66 @@
+-----------Exception Details on  1/24/2023 12:14:04 AM-----------------
+-------------------------------------------------------------------------------------
+
+
+
+Log Written Date: 1/24/2023 12:14:04 AM
+
+Logged User Full Name : Unknown
+
+Logged Username : Unknown
+
+User Role : Unknown
+
+Error Location : CIA_BLL.Repository.InvoiceRepository
+
+Error Line No : ine 101
+
+Error Class: NullReferenceException
+
+Exception Type: System.NullReferenceException
+
+Error Message : Object reference not set to an instance of an object.
+
+Error Page Url: https://localhost:44312/InvoiceEntry/addInvoiceEntry
+
+Exception : System.NullReferenceException: Object reference not set to an instance of an object.
+   at CIA_BLL.Repository.InvoiceRepository.add_IE(List`1 InvoiceEntry_header, List`1 InvoiceEntry_dtls, String clicked_state) in C:\project\workout\CIA\CIA_BLL\Repository\InvoiceRepository.cs:line 101
+
+
+--------------------------------*End*------------------------------------------
+
+
+
+-----------Exception Details on  1/24/2023 10:43:15 PM-----------------
+-------------------------------------------------------------------------------------
+
+
+
+Log Written Date: 1/24/2023 10:43:15 PM
+
+Logged User Full Name : Unknown
+
+Logged Username : Unknown
+
+User Role : Unknown
+
+Error Location : CIA.Controllers.SecurityController
+
+Error Line No : line 36
+
+Error Class: NullReferenceException
+
+Exception Type: System.NullReferenceException
+
+Error Message : Object reference not set to an instance of an object.
+
+Error Page Url: https://localhost:44312/Security/Loginchecks
+
+Exception : System.NullReferenceException: Object reference not set to an instance of an object.
+   at CIA.Controllers.SecurityController.Loginchecks(String username, String password, String c_Captcha) in C:\project\workout\CIA\CIA\Controllers\SecurityController.cs:line 36
+
+
+--------------------------------*End*------------------------------------------
+
+
+

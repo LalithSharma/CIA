@@ -1,0 +1,95 @@
+﻿.table > thead {
+    border-top: 1px solid #C1C1C1;
+}
+
+    .table > thead > tr > th {
+        word-wrap: break-word;
+        font-family: 'Segoe UI';
+        border: 1px solid #C1C1C1;
+        border-top: 0px solid #C1C1C1;
+        padding: 5px;
+    }
+
+.table > tbody > tr > td {
+    word-wrap: break-word;
+    border: 1px solid #C1C1C1;
+    border-top: 0px solid #C1C1C1;
+    font-family: 'Segoe UI';
+    padding: 5px;
+}
+
+.tb tbody {
+    display: block;
+    height: auto;
+    overflow: auto;
+}
+
+    .tb thead, .tb tbody tr {
+        display: table;
+        width: 100%;
+        table-layout: fixed;
+    }
+
+.tb thead {
+    background: #646464; 
+        /*#808080;*/
+    color: whitesmoke;
+    font-family: 'Segoe UI';
+    font-size : 9pt;
+}
+
+    .tb thead th {
+        text-align: center;
+        font-size: 9pt;
+        padding: 5px;
+        font-weight: normal;
+    }
+
+.tb tbody tr td {
+    background: #FFF;
+    font-size: 9pt;
+    padding: 5px;
+}
+
+/*.tb td, .tb th {
+    word-wrap: break-word;
+    border: 1px solid #ccc;
+    font-family: 'Segoe UI';
+}*/
+
+/*.tb thead {
+            width: calc( 100% - 0.4em );
+}*/
+
+
+/*a:link - a normal, unvisited link
+a:visited - a link the user has visited
+a:hover - a link when the user mouses over it
+a:active - a link the moment it is clicked*/
+
+.odt-btn:link {
+    color: #fff;
+    background-color: rgb(89,89,89);
+    border-color: rgb(89,89,89);
+    padding: 0px;
+    font-size: 10pt;
+    height: 25pt;
+}
+
+/*.odt-btn:active {
+    color: #fff;
+    background-color: rgb(89,89,89);
+    border-color: rgb(89,89,89);    
+}
+
+.odt-btn:visited {
+    color: #efecec;
+    background-color: #818080;
+    border-color: #818080;
+}
+
+.odt-btn:hover {
+    color: #efecec;
+    background-color: #818080;
+    border-color: #818080;
+}*/
