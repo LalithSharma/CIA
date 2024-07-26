@@ -33,7 +33,7 @@ app.controller('cliententry_ctrl', function ($scope, $http) {
     }
     $scope.Load_grid();  
        
-    // On button clicked action
+    // On button clicked action item on the button
     $scope.btClk = function (btn_action) {
         $scope.bnt_status = btn_action;
         ShowProgress();
